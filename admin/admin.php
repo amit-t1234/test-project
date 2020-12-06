@@ -1,13 +1,31 @@
 <?php
 
-	//require_once("../session.php");
+	require_once("../session.php");
 
-	// require_once("../class.user.php");
-	//**********************************************
-		echo "No Admin to Display";
-	//**********************************************
+	require_once("../class.user.php");
+	$auth_user = new USER();
 
 
+	$user_id = $_SESSION['user_session'];
+
+	$stmt = $auth_user->runQuery("SELECT * FROM users WHERE user_id=:user_id");
+	$stmt->execute(array(":user_id"=>$user_id));
+
+	$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+  $id = $userRow['user_id'];
+	if ($id == 1){
+
+		//echo "Your are Admin";
+	}
+
+	else{
+		header("location: ../member/home.php");
+	}
+
+	if(!$_SESSION['user_session']){
+
+		header("location: ../login/denied.php");
+	}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -78,13 +96,15 @@ table.altrowstable td {
 
 	<div id="main3">
 
-		<div id="header"><img src="../img/logo.png"></div>
+		<div id="header"><a href="../index.php"><img src="../img/logo.png"></a></div>
 <center>
 	<div id="manu">
 	<ul>
-	<li><a href="admin.php" >HOME</a></li>
+	<li><a href="admin.php"  style="background:#1f447f; color:#fff;">HOME</a></li>
+		<li><a href="user.php" >USER</a></li>
 	<li><a href="product.php" >PRODUCT</a></li>
 	<li><a href="order.php" >ORDER</a></li>
+			<li><a href="message.php" >Messages</a></li>
 	<li><a href="../login/logout.php?logout=true" >SIGN OUT</a></li>
 	</ul>
 	</div>
@@ -96,7 +116,8 @@ table.altrowstable td {
 <p> In this web app admin can access rich features like below. </p>
 <p>1. Add Edit Delete Products</p>
 <p>2. Add Edit Delete Orders</p>
-<p>3. Manage Orders</p>
+<p>3. Manage Users</p>
+<p>4. Manage Messages</p>
 
 
 </div>

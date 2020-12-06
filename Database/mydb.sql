@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2017 at 11:50 AM
+-- Generation Time: Dec 06, 2017 at 01:54 PM
 -- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `mydb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `mid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `mobile` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mssg` varchar(300) NOT NULL,
+  `cdate` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -45,17 +60,13 @@ CREATE TABLE `ordrs` (
 --
 
 INSERT INTO `ordrs` (`myid`, `uid`, `img`, `name`, `mobile`, `email`, `addr`, `ordr`, `pr`, `sts`, `cdate`) VALUES
-(28, 3, 'img/.jpg', 'dddd', '+4354354', 'dd@gmail.com', 'sdsdefd', 'Photoshop', '$100', 'Pending', '2017-10-16'),
-(27, 3, 'img/11.jpg', 'dd done', '+64143434', 'dd@gmail.com', 'dd new order Taxes America', 'CSS ', '$200', 'Dispatched', '2017-10-16'),
-(26, 2, 'img/11.jpg', 'David ', '+374341', 'david@gmail.com', 'My new NY Address David America', 'CSS ', '$200', 'Dispatched', '2017-10-16'),
-(29, 3, 'img/.jpg', 'dsdasd', '+54645', 'dd', 'sdasdsd', 'Photoshop', '$100', 'Pending', '2017-10-16'),
-(25, 2, 'img/.jpg', 'David', '+75435434', 'david@gmail.com', 'dfsdde David NY', 'Photoshop', '$100', 'Dispatched', '2017-10-16'),
-(30, 2, 'img/.jpg', 'rrrr', '+14314543', 'jj@gmail.com', 'jj Ny City ', 'Photoshop', '$100', 'Pending', '2017-10-19'),
-(31, 2, 'img/11.jpg', 'rr', 'rr', 'rr', 'rrr', 'CSS ', '$200', 'Pending', '2017-10-19'),
-(32, 2, 'img/.jpg', 'jj', '+5435413', 'jj@example.com', 'fddsfsdf', 'Photoshop', '$100', 'Pending', '2017-10-19'),
-(33, 2, 'img/.jpg', 'jj', '+41354134', 'jj@example.com', 'sdahksahd', 'Photoshop', '$100', 'Pending', '2017-10-19'),
-(34, 2, 'img/16.jpg', 'jj', '+54135441', 'jj@example.com', 'fdfdsffs', 'Blogger', '$200', 'Pending', '2017-10-19'),
-(35, 1, 'img/15.jpg', 'admin', '+34414', 'admin@example.com', 'customerbehalf link access ', 'PHP ', '$400', 'Pending', '2017-10-19');
+(37, 2, 'img/26.jpg', 'jj', '313431433', 'jj@example.com', 'fsdfwe', 'Footbal', 'Free', 'Pending', '2017-11-23'),
+(38, 5, '', 'don', '453', 'don@gmail.com', '45345', 'Ad HTML ', '$300', 'Pending', '2017-12-05'),
+(39, 5, 'img/25.jpg', 'don', '57297575', 'don@gmail.com', 'Any Address for tEst ', 'Ad HTML ', '$300', 'Pending', '2017-12-05'),
+(40, 5, 'img/23.jpg', 'don', '435434', 'don@gmail.com', 'My new test ', 'Advanced', '$500', 'Pending', '2017-12-05'),
+(41, 5, 'img/16.jpg', 'don', '45334', 'don@gmail.com', 'tgdgf', 'Blogger', '$200', 'Pending', '2017-12-05'),
+(42, 2, 'img/.jpg', 'jj', '5475', 'jj@example.com', 'hrt', 'Photoshop', '$100', 'Pending', '2017-12-05'),
+(43, 2, 'img/12.jpg', 'jj', '6756', 'jj@example.com', '6ghfhgf', 'HTML Course', '$200', 'Pending', '2017-12-05');
 
 -- --------------------------------------------------------
 
@@ -77,15 +88,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`pid`, `img`, `name`, `des`, `pr`, `cdate`) VALUES
-(23, 'img/18.jpg', 'New Product', 'sdasdsadasd', '43334', '2017-10-16'),
-(15, 'img/14.jpg', 'JavaScript', 'best JS courses', '$200', '2017-10-16'),
-(16, 'img/15.jpg', 'PHP ', 'PHP training courses', '$400', '2017-10-16'),
-(13, 'img/12.jpg', 'HTML Course', 'best courses in urdu Hindi', '$200', '2017-10-16'),
-(18, 'img/16.jpg', 'Blogger', 'Blogger course', '$200', '2017-10-16'),
-(12, 'img/11.jpg', 'CSS ', 'Learn Cascading Style with project in Urdu Hidni', '$200', '2017-10-16'),
-(11, 'img/.jpg', 'Photoshop', 'Best Training courses in Urdu Hindi language. ', '$100', '2017-10-16'),
-(25, 'img/23.jpg', 'Advanced', 'JavaScrip Advanced Curses', '$500', '2017-10-19'),
-(26, 'img/25.jpg', 'Ad HTML ', 'Learn new HTML course', '$300', '2017-10-19');
+(26, 'img/25.jpg', 'Ad HTML ', 'Learn new HTML course', '$300', '2017-10-19'),
+(30, 'img/26.jpg', 'PHP MySQL ', 'Complete Video training course. ', '$200', '2017-12-05'),
+(31, 'img/30.jpg', 'CSS MAster ', 'Complete Course for Web Design', '$300', '2017-12-05'),
+(32, 'img/31.jpg', ' JavaScript for Beginners ', 'Best course for basic level', '$200', '2017-12-06');
 
 -- --------------------------------------------------------
 
@@ -108,11 +114,21 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `joining_date`) VALUES
 (1, 'admin', 'admin@example.com', '$2y$10$ujej4UpRJsbf3ETJRrqg8uQ7pBv4HX5w77dho8cD9t8zVK/zt75Na', '2017-10-15 11:33:28'),
 (2, 'jj', 'jj@example.com', '$2y$10$aQUx3BOwroeFTAWja6ThF.H5y99jgike6o/IskgIlxo.7QLUHB7.C', '2017-10-15 11:33:48'),
-(3, 'dd', 'dd@gmail.com', '$2y$10$KR3HabnOr3dgusF4XWJnQ.jnVcNfl8adjN4onmTr66/y045MCCyam', '2017-10-16 07:19:25');
+(3, 'dd', 'dd@gmail.com', '$2y$10$KR3HabnOr3dgusF4XWJnQ.jnVcNfl8adjN4onmTr66/y045MCCyam', '2017-10-16 07:19:25'),
+(4, 'David', 'david@gmail.com', '$2y$10$y3NgKp.DzKIdBoRRbyxnXuUDdB/PlXLGKGUsJmjKciuLU1PN2izUK', '2017-12-04 04:06:52'),
+(5, 'don', 'don@gmail.com', '$2y$10$pCo4MOHPDFdk4DgUKbYw4OubecrEm8ZmERG/7tVpPKOh817TFYFV2', '2017-12-04 04:07:27'),
+(6, 'John', 'john@gmail.com', '$2y$10$BpV9P7gNd8IGTPoxgXC2beiKpVsFOmgg5aAFAzLVWu1Z7skBYUTYi', '2017-12-04 04:18:26'),
+(7, 'don43fe', 'dondfsdf@gmail.com', '$2y$10$KDfwZhbMZ.O9iVqyGmLii.jUHI7wUlpoSzznb1AMLj/k2GGprHnxS', '2017-12-04 04:57:35');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`mid`);
 
 --
 -- Indexes for table `ordrs`
@@ -137,20 +153,25 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `ordrs`
 --
 ALTER TABLE `ordrs`
-  MODIFY `myid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `myid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

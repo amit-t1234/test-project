@@ -1,14 +1,8 @@
 
-
 <?php
-session_start();
+
 require_once('../class.user.php');
 $user = new USER();
-
-if($user->is_loggedin()!="")
-{
-	$user->redirect('../admin/admin.php');
-}
 
 if(isset($_POST['btn-signup']))
 {
@@ -74,7 +68,7 @@ if(isset($_POST['btn-signup']))
 
 
         <form method="post" >
-            <h1>Sign up.</h1>
+            <h1>Add User</h1>
             <?php
 			if(isset($error))
 			{

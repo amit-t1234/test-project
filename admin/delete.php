@@ -32,7 +32,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Product Delete Alert </title>
+<title>Delete </title>
 <link rel="stylesheet" href="../style/style.css" type="text/css"  />
 </head>
 <body>
@@ -62,6 +62,9 @@
 
 
 ?>
+
+
+
 
 <?php
 	include_once '../connection/dbconfig.php';
@@ -93,6 +96,60 @@
 
 
 
+<?php
+	include_once '../connection/dbconfig.php';
+
+	if(isset($_GET['mid']))
+	{
+		$id = $_GET['mid'];
+		$stmt=$db_con->prepare("DELETE FROM message WHERE mid=:id");
+		$stmt->execute(array(':id'=>$id));
+
+
+		echo '	<div id="main2">
+
+										<h1><font color="red">Message Deleted !</font></h1>
+
+		               <p><b>Single Message Deleted permenatly from record.</b></p>
+
+
+										<p><a href="message.php" ><button class="button" >Back</button</a>
+		</p>
+		        </div>';
+
+
+	}
+
+
+?>
+
+
+<?php
+	include_once '../connection/dbconfig.php';
+
+	if(isset($_GET['uid']))
+	{
+		$id = $_GET['uid'];
+		$stmt=$db_con->prepare("DELETE FROM users WHERE user_id=:id");
+		$stmt->execute(array(':id'=>$id));
+
+
+		echo '	<div id="main2">
+
+										<h1><font color="red">User Deleted !</font></h1>
+
+		               <p><b>User Deleted permenatly from record.</b></p>
+
+
+										<p><a href="user.php" ><button class="button" >Back</button</a>
+		</p>
+		        </div>';
+
+
+	}
+
+
+?>
 
 
 

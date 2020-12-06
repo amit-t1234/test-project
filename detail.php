@@ -28,7 +28,37 @@
   require_once 'connection/dbconfig.php';
 
   //**********************************************
-    echo "No Detail";
+  $pid = $_GET['pid'];
+
+  	$stmt = $db_con->prepare("SELECT * FROM product WHERE pid = $pid");
+  	$stmt->execute();
+  $row=$stmt->fetch(PDO::FETCH_ASSOC);
+
+
+  $img = $row['img'];
+  $name =  $row['name'];
+  $des = $row['des'];
+   $pr = $row['pr'];
+  $cdate =  $row['cdate'];
+
+
+  echo '
+  <div class="item1">
+
+  <span><img src="'.$img.'"></span>
+
+  </div>
+  ';
+
+  echo '
+<div class="item1">
+<button class="button2"> Price '.$pr.'</button><br>
+<h2>'.$name.'</h2>
+<span><b>Description </b><br>'.$des.'<span><br><br>
+<b><b>Publish Date </b>'.$cdate.'</b><br>
+<button class="button2"> <a href="add-order.php?pid='.$pid.'" > Order Now</a> </button>
+
+</div>';
   //**********************************************
 
   ?>

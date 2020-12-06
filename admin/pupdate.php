@@ -58,7 +58,7 @@ require_once '../connection/dbconfig.php';
 
 		if($stmt->execute())
 		{
-			echo "<p>Order Successfully updated<p>";
+			//echo "<p>Product Successfully updated<p>";
 		}
 		else{
 			echo "Query Problem";
@@ -102,7 +102,7 @@ require_once '../connection/dbconfig.php';
 
 								<h1><font color='green'>Congratulation!</font></h1>
 
-               <p><b>Order Successfully Updated.</b></p>
+               <p><b>Product Successfully Updated.</b></p>
 
 
 								<p><a href="product.php" ><button class="button" >Back</button</a>

@@ -1,9 +1,30 @@
+
 <?php
 
-	//require_once("session.php");
-//	require_once("class.user.php");
+	require_once("session.php");
+	require_once("class.user.php");
+	$auth_user = new USER();
+
+
+	$user_id = $_SESSION['user_session'];
+
+
+	$stmt = $auth_user->runQuery("SELECT * FROM users WHERE user_id=:user_id");
+	$stmt->execute(array(":user_id"=>$user_id));
+
+	$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+  $uid = $userRow['user_id'];
+
+
+
+	if(!$_SESSION['user_session']){
+
+		header("location: login/denied.php");
+	}
 
 ?>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,7 +39,16 @@
   require_once 'connection/dbconfig.php';
 
 	//**********************************************
-		echo "Order Will not Submitted";
+	$pid = $_GET['pid'];
+
+	$stmt = $db_con->prepare("SELECT * FROM product WHERE pid = $pid");
+	$stmt->execute();
+$row=$stmt->fetch(PDO::FETCH_ASSOC);
+
+$pr = $row['pr'];
+$name = $row['name'];
+
+$img = $row['img'];
 	//**********************************************
 
 
@@ -39,9 +69,9 @@
 				<td>Price</td>
 				<td>
 
-					<input type='text' name='pr' value="<?php // echo $pr ?>" />
-          <input type='hidden' name='img' value="<?php //echo $img ?>"  />
-					<input type='hidden' name='uid' value="<?php //echo $uid ?>"  />
+					<input type='text' name='pr' value="<?php  echo $pr ?>" />
+          <input type='hidden' name='img' value="<?php echo $img ?>"  />
+					<input type='hidden' name='uid' value="<?php echo $uid ?>"  />
 
 
 				</td>
@@ -49,16 +79,16 @@
 
         <tr>
             <td>Order</td>
-            <td><input type='text' name='ordr' value="<?php // echo $name ?>"  placeholder='' required /></td>
+            <td><input type='text' name='ordr' value="<?php  echo $name ?>"  placeholder='' required /></td>
         </tr>
 
 				<tr>
 						<td>Name</td>
-						<td><input type='text' name='name' value="<?php //echo $userRow['user_name']; ?>"  placeholder='' required /></td>
+						<td><input type='text' name='name' value="<?php echo $userRow['user_name']; ?>"  placeholder='' required /></td>
 				</tr>
 
-  <input type='hidden' name='cdate'  value="<?php //echo date('Y-m-d'); ?>" class='form-control' placeholder='' >
-	<input type='hidden' name='img'  value="<?php //echo $img ?>" class='form-control' placeholder='' >
+  <input type='hidden' name='cdate'  value="<?php echo date('Y-m-d'); ?>" class='form-control' placeholder='' >
+	<input type='hidden' name='img'  value="<?php echo $img ?>" class='form-control' placeholder='' >
 
 
 		<tr>
@@ -67,7 +97,7 @@
 				</tr>
 				<tr>
 						<td>Email</td>
-						<td><input type='text' name='email'   value="<?php //echo $userRow['user_email']; ?>" class='form-control' placeholder='Add Email'>
+						<td><input type='text' name='email'   value="<?php echo $userRow['user_email']; ?>" class='form-control' placeholder='Add Email'>
 				</tr>
 
 				<tr>

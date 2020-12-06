@@ -30,7 +30,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Product</title>
+<title>Message</title>
 <link href="../style/style1.css" rel="stylesheet" type="text/css">
 
 <!-- Javascript goes in the document HEAD -->
@@ -122,9 +122,9 @@ ul.pagination a.current {
 	<div id="manu">
 	<ul>
 	<li><a href="admin.php" >HOME</a></li>
-	<li><a style="background:#1f447f; color:#fff;" href="product.php" >PRODUCT</a></li>
+	<li><a  href="product.php" >PRODUCT</a></li>
 	<li><a href="order.php" >ORDER</a></li>
-				<li><a href="message.php" >Messages</a></li>
+		<li><a style="background:#1f447f; color:#fff;" href="message.php" >Messages</a></li>
 	<li><a href="../login/logout.php?logout=true" >SIGN OUT</a></li>
 	</ul>
 	</div>
@@ -132,7 +132,7 @@ ul.pagination a.current {
 </center>
 <br>
 <div id="content">
-	<h2><a class="button" href="add-product.php"> Add Product</a> Admin Access Only [Product Page] </h2>
+	<h2><a class="button" href="#"> Messages</a> Admin Access Only </h2>
 
 <center>
 
@@ -141,13 +141,13 @@ ul.pagination a.current {
         <thead>
         <tr>
         <th>ID</th>
-        <th>Image</th>
         <th>Name</th>
-				<th>Description</th>
-				<th>Price</th>
+				<th>Mobile</th>
+				<th>Email</th>
+					<th>Message</th>
 		    <th>Date</th>
-        <th>Edit</th>
-        <th>Delete</th>
+				<th>Delete</th>
+
         </tr>
         </thead>
         <tbody>
@@ -160,11 +160,11 @@ ul.pagination a.current {
 					$page = (int)(!isset($_GET["page"]) ? 1 : $_GET["page"]);
 					if ($page <= 0) $page = 1;
 
-					$per_page = 5; // Set how many records do you want to display per page.
+					$per_page = 6; // Set how many records do you want to display per page.
 
 					$startpoint = ($page * $per_page) - $per_page;
 
-					$statement = "`product` ORDER BY `pid` ASC"; // Change `records` according to your table name.
+					$statement = "`message` ORDER BY `mid` ASC"; // Change `records` according to your table name.
 
 					$results = mysqli_query($conDB,"SELECT * FROM {$statement} LIMIT {$startpoint} , {$per_page}");
 
@@ -175,21 +175,20 @@ ul.pagination a.current {
 
 				?>
 			<tr>
-			<td><?php echo $row['pid']; ?></td>
-
-			<td><img with="50" height="50" src="../<?php  echo $row['img']; ?>"></td>
-			<td><?php echo $row['name']; ?></td>
-			<td><?php echo $row['des']; ?></td>
-			<td><?php echo $row['pr']; ?></td>
+			<td><?php echo $row['mid']; ?></td>
+      <td><?php echo $row['name']; ?></td>
+			<td><?php echo $row['mobile']; ?></td>
+			<td><?php echo $row['email']; ?></td>
+			<td><?php echo $row['mssg']; ?></td>
 			<td><?php echo $row['cdate']; ?></td>
 
-			<td align="center">
-			<a   href="pedit.php?pid=<?php  echo $row['pid']; ?>" title="Edit">
-			<img src="../img/edit.png" width="20px" />
-            </a></td>
-			<td align="center"><a   href="delete.php?pid=<?php echo $row['pid']; ?>" title="Delete">
+
+			<td align="center"><a   href="delete.php?mid=<?php echo $row['mid']; ?>" title="Delete">
 			<img src="../img/delete.png" width="20px" />
-            </a></td>
+						</a></td>
+
+
+
 			</tr>
 
 <?php

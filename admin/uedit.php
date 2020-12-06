@@ -30,11 +30,11 @@
 <?php
 include_once '../connection/dbconfig.php';
 
-if(isset($_GET['pid']))
+if(isset($_GET['uid']))
 {
-	$id = $_GET['pid'];
-	$stmt=$db_con->prepare("SELECT * FROM product WHERE pid=:pid");
-	$stmt->execute(array(':pid'=>$id));
+	$id = $_GET['uid'];
+	$stmt=$db_con->prepare("SELECT * FROM users WHERE user_id=:uid");
+	$stmt->execute(array(':uid'=>$id));
 	$row=$stmt->fetch(PDO::FETCH_ASSOC);
 }
 
@@ -44,7 +44,7 @@ if(isset($_GET['pid']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Prdoduct Edit</title>
+<title>User Edit</title>
 <link href="../style/style.css" rel="stylesheet" type="text/css">
 
 
@@ -60,52 +60,37 @@ if(isset($_GET['pid']))
 
 
 
-	 <form method='post' action="pupdate.php">
+	 <form method='post' action="uupdate.php">
 
     <table class='table table-bordered'>
 
 
 <tr>
-	    <td colspan="2"><h1>Edit Information </h1></td>
+	    <td colspan="2"><h1>Edit User's Information </h1></td>
 </tr>
-<tr>
-<td>Product ID</td>
-<td>
-	<input type='text' name='pid' value="<?php echo $row['pid']; ?>" />
-
-	<input type='hidden' name='img' value="<?php echo $row['img']; ?>" />
 
 
-</td>
+	<input type='hidden' name='uid' value="<?php echo $row['user_id']; ?>" />
 
-
-
-
-</tr>
 <tr>
 				<td>Name</td>
-				<td><input type='text' name='name' value="<?php echo $row['name']; ?>" class='form-control' placeholder='' /></td>
+				<td><input type='text' name='muname' value="<?php echo $row['user_name']; ?>" class='form-control' placeholder='' /></td>
 		</tr>
 		<tr>
-				<td>Description</td>
-				<td><input type='text' name='des'  value="<?php echo $row['des']; ?>"  class='form-control' placeholder='' ></td>
+				<td>Email</td>
+				<td><input type='text' name='ue'  value="<?php echo $row['user_email']; ?>"  class='form-control' placeholder='' ></td>
 		</tr>
-		<tr>
-				<td>Price</td>
-				<td><input type='text' name='pr'  value="<?php echo $row['pr']; ?>"  class='form-control' placeholder='' ></td>
-		</tr>
-
-
 		<tr>
 				<td>Date</td>
-				<td><input type='text' name='cdate' value="<?php echo $row['cdate']; ?>"  class='form-control' placeholder='' ></td>
+				<td><input type='text' name='jd'  value="<?php echo $row['joining_date']; ?>"  class='form-control' placeholder='' ></td>
 		</tr>
+
 
 
 			<tr>
 
             <td></td><td>
-            <button type="submit" class="button" >Save Updates
+            <button type="submit" name="uupdate" class="button" >UPDATE
 			</button>
 
             </td>

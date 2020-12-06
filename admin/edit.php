@@ -44,7 +44,7 @@ if(isset($_GET['myid']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Insert, Update, Delete using jQuery, PHP and MySQL</title>
+<title>Edit Form</title>
 <link href="../style/style.css" rel="stylesheet" type="text/css">
 
 
@@ -111,7 +111,7 @@ if(isset($_GET['myid']))
 			<tr>
 
             <td></td><td>
-            <button type="submit" class="button" >Save Updates
+            <button type="submit"  name="oupdate" class="button" >Save Updates
 			</button>
 
             </td>

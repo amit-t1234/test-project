@@ -56,9 +56,34 @@ ul.pagination a.current {
   include_once('connection/connectionz.php');
   include_once('function/functionz.php');
 
+  $page = (int)(!isset($_GET["page"]) ? 1 : $_GET["page"]);
+    if ($page <= 0) $page = 1;
+
+    $per_page = 6; // Set how many records do you want to display per page.
+
+    $startpoint = ($page * $per_page) - $per_page;
+
+    $statement = "`product` ORDER BY `pid` ASC";
+
 
 //**********************************************
-  echo "No Record";
+$stmt = $db_con->prepare("SELECT * FROM product ORDER BY pid DESC  LIMIT {$startpoint} , {$per_page} ");
+$stmt->execute();
+while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+
+  $img = $row['img'];
+  $pid = $row['pid'];
+  $pr = $row['pr'];
+
+  echo '
+  <div class="item">
+  <button class="button">Price '.$pr.' </button><br>
+  <span><img src="'.$img.'"><span><br>
+    <span class="more"><a href="detail.php?pid='.$pid.'" >More Detail</a></span>
+     <span class="order"><a href="add-order.php?pid='.$pid.'" >Order Now</a></span>
+</div>';
+
+} // While loop End
 //**********************************************
 ?>
 
@@ -75,7 +100,7 @@ ul.pagination a.current {
     <?php
 
             // displaying paginaiton.
-          //  echo pagination($statement,$per_page,$page,$url='?');
+            echo pagination($statement,$per_page,$page,$url='?');
             ?>
     </center>
     <br>

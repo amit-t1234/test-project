@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Sign In</title>
+<title>Contact</title>
 <link rel="stylesheet" href="style/style1.css" type="text/css"  />
 <style>
 ul.pagination {
@@ -51,23 +51,71 @@ ul.pagination a.current {
 <div id="content">
 
 <center>
-  <form  method="post" action="contact.php" >
+
 
    <h1 >Contact Us</h1>
 
-
+<form method="post" action="contact.php">
    <input type="text"  name="name" placeholder="Name" required /><br><br>
    <input type="text"  name="email" placeholder="Email" required /><br><br>
    <input type="text"  name="mobile" placeholder="Mobile" required /><br><br>
-   <textarea type="text"  name="message" placeholder="Message" required /></textarea><br>
+   <textarea type="text" cols="10" rows="10" name="mssg" placeholder="Message" required /></textarea><br>
 
 <br>
 
-       <button  type="submit"  class="button"> SEND </button>
+       <button  type="submit" name="ccontact"  class="button"> SEND </button>
 
 
 
  </form>
+
+ <br><br>
+
+<?php
+ require_once 'connection/dbconfig.php';
+
+
+ 	if(isset($_POST['ccontact'])){
+
+
+ 		$name = $_POST['name'];
+ 		$mb = $_POST['mobile'];
+ 		$em = $_POST['email'];
+ 		$mssg = $_POST['mssg'];
+ 		$cdate = date('Y-m-d');
+
+ 		try{
+
+ 			$stmt = $db_con->prepare("INSERT INTO message(name, mobile, email, mssg,cdate)
+ 			VALUES(:nm, :mb, :em, :sms,:cd)");
+
+ 			$stmt->bindParam(":nm", $name);
+ 			$stmt->bindParam(":mb", $mb);
+ 			$stmt->bindParam(":em", $em);
+ 			$stmt->bindParam(":sms", $mssg);
+ 			$stmt->bindParam(":cd", $cdate);
+
+
+ 			if($stmt->execute())
+ 			{
+ 				echo '<b><font color="green">Congratulation! <br>Your Message submitted Successfully. Admin will contact you shortly.</font></b>';
+
+ 			}
+ 			else{
+ 				echo "Query Problem";
+ 			}
+ 		}
+ 		catch(PDOException $e){
+ 			echo $e->getMessage();
+ 		}
+ 	}
+
+
+
+
+
+ ?>
+
 
 </center>
     <br>
